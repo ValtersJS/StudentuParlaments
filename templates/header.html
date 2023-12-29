@@ -1,0 +1,44 @@
+<div class="sticky top-0 bg-gray-400 shadow">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 justify-between">
+      <div class="flex">
+        <!-- Left side of the header: place for logo or brand name -->
+      </div>
+
+      <form class="flex" action="reroute.php" method="get">
+        <button
+          class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          type="submit"
+          name="redirectTo"
+          value="http://localhost/site/public/LoginPage.php"
+        >
+          Sākums
+        </button>
+        <button
+          class="ml-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+          type="submit"
+          name="redirectTo"
+          value="http://localhost/site/public/EventPage.php"
+        >
+          Pasākumi
+        </button>
+        <button
+          class="ml-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+          type="submit"
+          name="redirectTo"
+          value="http://localhost/site/public/MessagesPage.php"
+        >
+          Ziņudēlis
+        </button>
+        <button
+          class="ml-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+          type="submit"
+          name="redirectTo"
+          value="http://localhost/site/public/AdminPage.php"
+        >
+          Admin
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
