@@ -11,7 +11,7 @@ class MessagesRepo extends AbstractItemRepository
 
   public static function getAll()
   {
-    $request = new ItemRepository();
+    $request = new MessagesRepo();
 
     $sql = "SELECT ZinasID, LietotajaID, Datums, Teksts FROM zinas";
     $result = $request->connect()->query($sql);

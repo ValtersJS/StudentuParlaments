@@ -1,5 +1,5 @@
 <?php
-use AuthClass;
+use Core\Repository\AuthRepo;
 
 include "AutoLoader.php";
 
@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validation (e.g., check if fields are empty)
 
-    $authenticator = new AuthClass();
-    $result = $authenticator->getAll($username, $password);
+    $authenticator = new AuthRepo();
+    $result = $authenticator->getAllMessages($username, $password);
     echo $result;
+    var_dump($result);
 }

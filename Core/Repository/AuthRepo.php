@@ -1,17 +1,19 @@
 <?php
 
-// namespace Core\Repository;
+namespace Core\Repository;
 
-use PDO;
-use PDOException;
-use FeatureClasess\Message;
+use Core\Repository\AbstractItemRepository;
 
-class AuthClass extends AbstractItemRepository
+class AuthRepo extends AbstractItemRepository
 {
-
-    public static function getAll($username, $password)
+    public static function getAll()
     {
-        $request = new ItemRepository();
+        return;
+    }
+
+    public static function getAllMessages($username, $password)
+    {
+        $request = new AuthRepo();
 
         $sql = $request->connect()->prepare("SELECT * FROM users WHERE username = ?");
         $sql->execute([$username]);

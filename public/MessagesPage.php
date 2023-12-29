@@ -16,9 +16,8 @@
         use Core\Repository\MessagesRepo;
 
         include "..\AutoLoader.php";
-        $request = new MessagesRepo();
-        $connection = $request->connect();
-        $items = $request->getAll();
+
+        $items = MessagesRepo::getAll();
         var_dump($items);
 
         ?>

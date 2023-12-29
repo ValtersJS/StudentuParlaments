@@ -13,15 +13,12 @@
 <body>
     <h1>
         <?php
-
         use Core\Repository\ItemRepository;
 
         include "..\AutoLoader.php";
-        $request = new ItemRepository();
-        $connection = $request->connect();
-        $items = $request->getAll();
-        var_dump($items);
 
+        $items = ItemRepository::getAll();
+        var_dump($items);
         ?>
     </h1>
 </body>

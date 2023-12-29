@@ -35,6 +35,10 @@ abstract class AbstractItemRepository
     }
   }
   public static abstract function getAll();
+  // public static function getAllMessages()
+  // {
+  //   echo "hello";
+  // }
 
   // public static abstract function deleteById($delValues);
 
