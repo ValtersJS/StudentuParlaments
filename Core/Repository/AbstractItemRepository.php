@@ -34,6 +34,7 @@ abstract class AbstractItemRepository
       echo "Connection failed: " . $e->getMessage();
     }
   }
+
   public static abstract function getAll();
   // public static function getAllMessages()
   // {
