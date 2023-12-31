@@ -30,4 +30,13 @@ class ItemRepository extends AbstractItemRepository
     return $arr;
   }
 
+  public static function createEvent($nosaukums, $teksts)
+  {
+    $request = new ItemRepository();
+    $insertSql = $request->connect()->prepare("INSERT INTO pasakumi (Nosaukums, Teksts) VALUES (?, ?)");
+    $insertSql->execute([$nosaukums, $teksts]);
+    $rez = $insertSql ? "Registration successful" : "Registration failed";
+    return $rez;
+  }
+
 }

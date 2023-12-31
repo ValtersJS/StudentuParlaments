@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 use Core\Repository\AuthRepo;
 
 include "AutoLoader.php";
@@ -13,7 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validation (e.g., check if fields are empty)
 
     $authenticator = new AuthRepo();
-    $result = $authenticator->getAllMessages($username, $password);
-    echo $result;
+    $result = $authenticator->getUser($username, $password);
+
+    if ($result["loginState"] == true) {
+        // header("Location: http://localhost/site/public/EventPage.php");
+    } else {
+        echo "<h1>Šis lietotājs nepastāv</h1>";
+    }
+    $_SESSION["permissions"] = $result['permissions'];
+    echo $_SESSION["permissions"];
     var_dump($result);
 }

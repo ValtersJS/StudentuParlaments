@@ -11,7 +11,7 @@ class AuthRepo extends AbstractItemRepository
         return;
     }
 
-    public static function getAllMessages($username, $password)
+    public static function getUser($username, $password)
     {
         $request = new AuthRepo();
 
@@ -22,11 +22,18 @@ class AuthRepo extends AbstractItemRepository
         if ($user && password_verify($password, $user['Password'])) {
             // if ($user && $password == $user["Password"]) {
             // Success: Username and password matched
-            return "Logged in successfully";
+            $loginState = true;
+            $permissions = $user['Permissions'];
+            return [
+                'loginState' => $loginState,
+                'permissions' => $permissions
+            ];
+            // return $loginState;
             // Additional actions like setting session variables can be done here
         } else {
             // Failure: Username and password didn't match
-            return "Invalid username or password";
+            $loginState = false;
+            return $loginState;
         }
     }
 
@@ -40,8 +47,8 @@ class AuthRepo extends AbstractItemRepository
 
         if ($user === false) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $insertSql = $request->connect()->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-            $insertSql->execute([$username, $hashedPassword]);
+            $insertSql = $request->connect()->prepare("INSERT INTO users (username, password, permissions) VALUES (?, ?, ?)");
+            $insertSql->execute([$username, $hashedPassword, "registered"]);
             $rez = $insertSql ? "Registration successful" : "Registration failed";
         } else {
             $rez = "User already exists!";
