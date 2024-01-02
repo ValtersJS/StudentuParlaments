@@ -24,4 +24,13 @@ class MessagesRepo extends AbstractItemRepository
     }
     return $arr;
   }
+
+  public static function createMessage($lietotajaID, $teksts)
+  {
+    $request = new MessagesRepo();
+    $insertSql = $request->connect()->prepare("INSERT INTO zinas (LietotajaID, Teksts) VALUES (?, ?)");
+    $insertSql->execute([$lietotajaID, $teksts]);
+    $rez = $insertSql ? "Ziņa publicēta" : "Ziņas publicēšana neizdevās";
+    return $rez;
+  }
 }

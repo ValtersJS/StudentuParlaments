@@ -1,7 +1,7 @@
 <?php
-
 namespace Core\Repository;
 
+session_start();
 use Core\Repository\AbstractItemRepository;
 
 class AuthRepo extends AbstractItemRepository
@@ -24,9 +24,11 @@ class AuthRepo extends AbstractItemRepository
             // Success: Username and password matched
             $loginState = true;
             $permissions = $user['Permissions'];
+            $userID = $user['UserID'];
             return [
                 'loginState' => $loginState,
-                'permissions' => $permissions
+                'permissions' => $permissions,
+                'userID' => $userID
             ];
             // return $loginState;
             // Additional actions like setting session variables can be done here

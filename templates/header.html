@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <div class="sticky top-0 bg-gray-400 shadow">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 justify-between">
@@ -42,6 +46,21 @@
         >
           Admin
         </button>
+      </form>
+      <form action="../AuthScript.php" method="post">
+        <button
+          class="ml-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+          type="submit"
+          name="Logout"
+          value="http://localhost/site/public/AdminPage.php"
+        >
+          Izrakstīties
+        </button>
+        <label>
+          <?php if (isset($_SESSION['username'])) { echo "<label
+            >" . htmlspecialchars($_SESSION['username']) . "</label
+          >"; } else { echo "<label>Guest</label>"; } ?>
+        </label>
       </form>
     </div>
   </div>
