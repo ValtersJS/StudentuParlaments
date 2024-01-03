@@ -13,10 +13,10 @@
     <div class="flex flex-col items-center justify-center min-h-screen pb-12">
         <!-- Login Form -->
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="../AuthScript.php" method="post">
-            <h1 class="block text-gray-800 text-lg font-bold mb-6">Login</h1>
+            <h1 class="block text-gray-800 text-lg font-bold mb-6">Pierakstīšanās</h1>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                    Username
+                    Lietotājvārds
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    Password
+                    Parole
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -33,7 +33,7 @@
             <div class="flex items-center justify-between">
                 <input
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" name="Login" value="Login">
+                    type="submit" name="Login" value="Pierakstīties">
             </div>
         </form>
 
@@ -42,7 +42,7 @@
             <h1 class="block text-gray-800 text-lg font-bold mb-6">Register</h1>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username-register">
-                    Username
+                    Lietotājvārds
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -50,7 +50,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password-register">
-                    Password
+                    Parole
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -59,7 +59,7 @@
             <div class="flex items-center justify-between">
                 <input
                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" value="Register">
+                    type="submit" value="Reģistrēties">
             </div>
         </form>
     </div>

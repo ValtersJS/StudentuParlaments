@@ -1,7 +1,7 @@
 <?php
 namespace Core\Repository;
 
-session_start();
+// session_start();
 use Core\Repository\AbstractItemRepository;
 
 class AuthRepo extends AbstractItemRepository

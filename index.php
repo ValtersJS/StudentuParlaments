@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-$_SESSION["username"] = "Valters";
 ?>
 
 <!doctype html>
@@ -20,7 +18,7 @@ $_SESSION["username"] = "Valters";
 <body class="bg-gray-400">
     <?php include "templates\header.html";
 
-    echo $_SESSION["username"];
+    // echo $_SESSION["username"];
     ?>
 </body>
 

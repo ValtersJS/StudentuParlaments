@@ -1,13 +1,9 @@
 <?php
+use Core\Repository\AuthRepo;
+
+include "AutoLoader.php";
+
 session_start();
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['selectedEvents'])) {
-//     $_SESSION['selectedEvents'] = $_POST['selectedEvents'];
-// }
-
-// // Redirect back to the events page or another appropriate page
-// header("Location: public/EventPage.php"); // Replace with the actual page you want to redirect to
-// exit;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Assuming the checkboxes are named 'selectedEvents[]'
@@ -15,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Update session with new selection
         $_SESSION['selectedEvents'] = $_POST['selectedEvents'];
 
-        // Optionally update cookie
-        setcookie('saved_data', json_encode($_POST['selectedEvents']), time() + 86400 * 30); // 30-day expiry
     } else {
         // If no checkboxes were selected, clear the selection
         $_SESSION['selectedEvents'] = [];

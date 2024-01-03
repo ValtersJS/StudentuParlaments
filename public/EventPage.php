@@ -21,9 +21,9 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <!-- <link href="output.css" rel="stylesheet"> -->
         <style>
-            .table-shadow {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            }
+        .table-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
         </style>
     </head>
 
@@ -43,7 +43,7 @@
                     $result = $request->connect()->query($sql);
 
                     $selectedEvents = isset($_SESSION['selectedEvents']) ? $_SESSION['selectedEvents'] : [];
-
+                    // var_dump($selectedEvents);
                     while ($row = $result->fetch()) {
                         $isChecked = in_array($row['PasakumaID'], $selectedEvents) ? "checked" : "";
                         echo "<div class='w-full md:w-1/3 px-2 mb-4'>";
@@ -57,34 +57,43 @@
                     ?>
                 </div>
             </div>
-            <div class="px-4 py-3 text-right sm:px-6">
-                <button type="submit"
-                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-                    Save Selection
+            <div class="px-4 py-3 mr-20 text-right sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent
+                    shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+                    Saglabā savu izvēli!
                 </button>
             </div>
         </form>
-
-        <form class="pt-20" action="../CreateEventScript.php" method="post">
-            <h1>Pievieno jaunu pasākumu!</h1>
-            <div>
-                <label for="event-name">
+        <?php
+        if (isset($_SESSION["permissions"]) && $_SESSION["permissions"] === "admin") {
+            ?>
+        <form class="pt-20 container mx-auto mb-32" action="../CreateEventScript.php" method="post">
+            <h1 class="text-2xl font-bold mb-4">Pievieno jaunu pasākumu!</h1>
+            <div class="mb-4">
+                <label for="event-name" class="block text-gray-700 text-sm font-bold mb-2">
                     Pasākuma nosaukums
                 </label>
-                <input id="event-name" type="text" name="name">
+                <input id="event-name" type="text" name="name"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
-            <div>
-                <label for="event-description">
+            <div class="mb-6">
+                <label for="event-description" class="block text-gray-700 text-sm font-bold mb-2">
                     Pasākuma apraksts
                 </label>
-                <input id="event-description" type="text" name="description">
+                <input id="event-description" type="text" name="description"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
             </div>
-            <div>
-                <input type="submit" value="Create">
+            <div class="flex items-center justify-between">
+                <input type="submit" value="Pievieno"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             </div>
         </form>
+        <?php
+        } else {
+            echo "<p>Jums nav tiesību pievienot pasākumus!</p>";
+        }
+        ?>
         </div>
-
     </body>
 
     </html>
