@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $authenticator->getUser($username, $password);
 
         if ($result["loginState"] == true) {
-            // header("Location: http://localhost/site/public/EventPage.php");
             // 
             // session_unset();
             // session_destroy();
@@ -35,8 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result && $result['Events']) {
                 $_SESSION['selectedEvents'] = json_decode($result['Events'], true);
             }
+            header("Location: http://localhost/site/public/EventPage.php");
         } else {
-            echo "<h1>Šis lietotājs nepastāv</h1>";
+            session_start();
+            $_SESSION['notAUser'] = "Šis lietotājs nepastāv";
+            header("Location: http://localhost/site/public/LoginPage.php");
+            // echo "<h1>Šis lietotājs nepastāv</h1>";
         }
 
         echo $_SESSION["permissions"];

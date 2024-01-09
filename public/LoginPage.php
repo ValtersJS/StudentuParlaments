@@ -15,6 +15,12 @@
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="../AuthScript.php" method="post">
             <h1 class="block text-gray-800 text-lg font-bold mb-6">Pierakstīšanās</h1>
             <div class="mb-4">
+                <?php
+                if (isset($_SESSION['notAUser'])) {
+                    echo "<p style='color:red;'>" . $_SESSION['notAUser'] . "</p>";
+                    unset($_SESSION["notAUser"]);
+                }
+                ?>
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                     Lietotājvārds
                 </label>

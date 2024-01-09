@@ -41,6 +41,12 @@
                 <div class="mt-10 bg-white p-6 rounded-lg shadow">
                     <form action="../CreateMessageScript.php" method="post">
                         <div class="mb-4">
+                            <?php
+                            if (isset($_SESSION['messageError'])) {
+                                echo "<p style='color:red;'>" . $_SESSION['messageError'] . "</p>";
+                                unset($_SESSION["messageError"]);
+                            }
+                            ?>
                             <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Jūsu ziņa:</label>
                             <textarea id="message" name="message" rows="4"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

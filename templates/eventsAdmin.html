@@ -1,0 +1,71 @@
+<?php
+    use Core\Repository\ItemRepository;
+include "..\AutoLoader.php";
+
+?>
+
+<!doctype html>
+<html>
+  <head>
+    <title>Event Management</title>
+    <link href="..\output.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto my-8">
+      <form action="path/to/delete_events_script.php" method="post">
+        <table
+          class="min-w-full overflow-hidden rounded-lg leading-normal shadow-md"
+        >
+          <thead>
+            <tr>
+              <th
+                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+              >
+                Event ID
+              </th>
+              <th
+                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+              >
+                Event Name
+              </th>
+              <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php $allEvents = ItemRepository::getAll(); foreach ($allEvents as
+            $event): ?>
+            <tr>
+              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <?php echo htmlspecialchars($event->getPasakumaID()); ?>
+              </td>
+              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                <?php echo htmlspecialchars($event->getNosaukums()); ?>
+              </td>
+              <td
+                class="border-b border-gray-200 bg-white px-5 py-5 text-right text-sm"
+              >
+                <input
+                  type="checkbox"
+                  name="eventsToDelete[]"
+                  value="<?php echo htmlspecialchars($event->getPasakumaID()); ?>"
+                  class="form-checkbox h-4 w-4"
+                />
+              </td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+        <button
+          type="submit"
+          class="mt-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+        >
+          Delete Selected Events
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

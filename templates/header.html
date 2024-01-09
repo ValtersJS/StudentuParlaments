@@ -56,7 +56,8 @@
           <?php if (session_status() == PHP_SESSION_NONE) { session_start(); }
           if (isset($_SESSION['username'])) { echo "<label
             >" . htmlspecialchars($_SESSION['username']) . "</label
-          >"; } else { echo "<label>Guest</label>"; } ?>
+          >"; } else { echo "<label><i>Viesis</i></label
+          >"; } ?>
         </label>
       </form>
     </div>

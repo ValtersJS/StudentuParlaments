@@ -8,7 +8,14 @@ class AuthRepo extends AbstractItemRepository
 {
     public static function getAll()
     {
-        return;
+        $request = new AuthRepo();
+
+        // Prepare and execute the SQL statement
+        $sql = $request->connect()->prepare("SELECT * FROM users");
+        $sql->execute();
+        $users = $sql->fetchAll();
+
+        return $users;
     }
 
     public static function getUser($username, $password)
@@ -36,6 +43,22 @@ class AuthRepo extends AbstractItemRepository
             // Failure: Username and password didn't match
             $loginState = false;
             return $loginState;
+        }
+    }
+
+    public static function deleteUser($userId)
+    {
+        $request = new AuthRepo();
+
+        // Prepare the SQL statement to delete a user
+        $sql = $request->connect()->prepare("DELETE FROM users WHERE UserID = ?");
+        $sql->execute([$userId]);
+
+        // Check if the delete operation was successful
+        if ($sql->rowCount() > 0) {
+            return true; // User was successfully deleted
+        } else {
+            return false; // No user was deleted (possibly because the user was not found)
         }
     }
 
