@@ -39,4 +39,20 @@ class ItemRepository extends AbstractItemRepository
     return $rez;
   }
 
+  public static function deleteEvent($pasakumaID)
+  {
+    $request = new ItemRepository();
+
+    // Prepare the SQL statement to delete a user
+    $sql = $request->connect()->prepare("DELETE FROM pasakumi WHERE PasakumaID = ?");
+    $sql->execute([$pasakumaID]);
+
+    // Check if the delete operation was successful
+    if ($sql->rowCount() > 0) {
+      return true; // User was successfully deleted
+    } else {
+      return false; // No user was deleted (possibly because the user was not found)
+    }
+  }
+
 }

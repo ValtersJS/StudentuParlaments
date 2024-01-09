@@ -50,7 +50,9 @@
           name="Logout"
           value="http://localhost/site/public/AdminPage.php"
         >
-          Izrakstīties
+          <?php if (session_status() == PHP_SESSION_NONE) { session_start(); }
+          if (isset($_SESSION['username'])) { echo "Izrakstīties"; } else { echo
+          "Pieslēgties"; } ?>
         </button>
         <label>
           <?php if (session_status() == PHP_SESSION_NONE) { session_start(); }

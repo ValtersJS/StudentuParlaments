@@ -1,0 +1,56 @@
+<?php
+use Core\Repository\AuthRepo;
+include "..\AutoLoader.php";
+?>
+
+<div class="container mx-auto my-8">
+  <form action="../DeleteUserEvent.php" method="post">
+    <table
+      class="min-w-full overflow-hidden rounded-lg leading-normal shadow-md"
+    >
+      <thead>
+        <tr>
+          <th
+            class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+          >
+            User ID
+          </th>
+          <th
+            class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+          >
+            Username
+          </th>
+          <th class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php $allUsers = AuthRepo::getAll(); foreach ($allUsers as $user): ?>
+        <tr>
+          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <?php echo htmlspecialchars($user['UserID']); ?>
+          </td>
+          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <?php echo htmlspecialchars($user['Username']); ?>
+          </td>
+          <td
+            class="border-b border-gray-200 bg-white px-5 py-5 text-right text-sm"
+          >
+            <input
+              type="checkbox"
+              name="usersToDelete[]"
+              value="<?php echo htmlspecialchars($user['UserID']); ?>"
+              class="form-checkbox h-4 w-4"
+            />
+          </td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+    <button
+      type="submit"
+      class="mt-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+    >
+      Delete Selected Users
+    </button>
+  </form>
+</div>
