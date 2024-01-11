@@ -14,7 +14,7 @@ include "../AutoLoader.php";
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100">
+<body style="background-color: #E7E6E1">
     <?php include "../templates/header.html"; ?>
     <?php
     if (isset($_SESSION["permissions"]) && $_SESSION["permissions"] === "admin") {

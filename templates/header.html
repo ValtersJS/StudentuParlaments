@@ -1,4 +1,4 @@
-<div class="sticky top-0 bg-gray-400 shadow">
+<div class="sticky top-0 shadow" style="background-color: #43766c">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 justify-between">
       <div class="flex">
@@ -11,7 +11,10 @@
         method="post"
       >
         <button
-          class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          class="my-1 rounded px-4 py-2 font-bold"
+          style="background-color: #fff4e0; color: #000000"
+          onmouseover="this.style.backgroundColor='#e0d4c1';"
+          onmouseout="this.style.backgroundColor='#FFF4E0';"
           type="submit"
           name="redirectTo"
           value="http://localhost/site/public/LoginPage.php"
@@ -19,7 +22,10 @@
           Sākums
         </button>
         <button
-          class="ml-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+          class="my-1 ml-4 rounded px-4 py-2 font-bold"
+          style="background-color: #fff4e0; color: #000000"
+          onmouseover="this.style.backgroundColor='#e0d4c1';"
+          onmouseout="this.style.backgroundColor='#FFF4E0';"
           type="submit"
           name="redirectTo"
           value="http://localhost/site/public/EventPage.php"
@@ -27,7 +33,10 @@
           Pasākumi
         </button>
         <button
-          class="ml-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+          class="my-1 ml-4 rounded px-4 py-2 font-bold"
+          style="background-color: #fff4e0; color: #000000"
+          onmouseover="this.style.backgroundColor='#e0d4c1';"
+          onmouseout="this.style.backgroundColor='#FFF4E0';"
           type="submit"
           name="redirectTo"
           value="http://localhost/site/public/MessagesPage.php"
@@ -35,7 +44,10 @@
           Ziņudēlis
         </button>
         <button
-          class="ml-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+          class="my-1 ml-4 rounded px-4 py-2 font-bold"
+          style="background-color: #fff4e0; color: #000000"
+          onmouseover="this.style.backgroundColor='#e0d4c1';"
+          onmouseout="this.style.backgroundColor='#FFF4E0';"
           type="submit"
           name="redirectTo"
           value="http://localhost/site/public/AdminPage.php"
@@ -48,7 +60,7 @@
           class="ml-4 rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
           type="submit"
           name="Logout"
-          value="http://localhost/site/public/AdminPage.php"
+          value="public/LoginPage.php"
         >
           <?php if (session_status() == PHP_SESSION_NONE) { session_start(); }
           if (isset($_SESSION['username'])) { echo "Izrakstīties"; } else { echo
@@ -56,11 +68,11 @@
         </button>
         <label>
           <?php if (session_status() == PHP_SESSION_NONE) { session_start(); }
-          if (isset($_SESSION['username'])) { echo "<label
-            >" . htmlspecialchars($_SESSION['username']) . "</label
-          >"; } else { echo "<label><i>Viesis</i></label
+          if (isset($_SESSION['username'])) { echo "<label style=\"color: #fff4e0\"
+            ><b>" . htmlspecialchars($_SESSION['username']) . "</b></label>"; }
+             else { echo "<label style=\"color: #fff4e0\"><i>Viesis</i></label
           >"; } ?>
-        </label>
+        </>
       </form>
     </div>
   </div>

@@ -27,7 +27,7 @@
         </style>
     </head>
 
-    <body class="bg-gray-100">
+    <body style="background-color: #E7E6E1">
         <?php include "../templates/header.html"; ?>
         <form action="../SaveSelectedEvents.php" method="post">
             <div class="container mx-auto mt-10 px-4">
@@ -57,8 +57,8 @@
                     ?>
                 </div>
             </div>
-            <div class="px-4 py-3 mr-20 text-right sm:px-6">
-                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent
+            <div class="px-4 py-3 mr-20 text-left sm:px-6">
+                <button type="submit" class="inline-flex justify-center py-2 px-4 ml-44 border border-transparent
                     shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
                     Saglabā savu izvēli!
                 </button>

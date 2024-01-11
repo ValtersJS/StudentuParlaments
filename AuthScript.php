@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $userID = $_SESSION['userID'];
         if ($_SESSION['selectedEvents'] != null) {
 
+            header("Location: public/LoginPage.php");
         }
         $selectedEvents = $_SESSION['selectedEvents'];
         $selectedEventsJson = json_encode($selectedEvents);
@@ -61,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_unset();
         session_destroy();
         sleep(1);
-        header("Location: http://localhost/site/public/LoginPage.php");
+        header("Location: public/LoginPage.php");
         var_dump($_SESSION);
     }
 }

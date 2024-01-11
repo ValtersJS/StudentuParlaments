@@ -7,15 +7,42 @@ include "AutoLoader.php";
 // require 'AuthClass.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = htmlspecialchars(trim($_POST['username']));
+    $password = htmlspecialchars(trim($_POST['password']));
 
-    // Validation (e.g., check if fields are empty)
+    session_start();
+    // Validācija
 
+    if (empty($username) || empty($password)) {
+        if (empty($username)) {
+            // Set an error message in the session
+            $_SESSION['usernameError'] = 'Lietotājvārds nevar būt tukša';
+        }
+        if (empty($password)) {
+            // Set an error message in the session
+            $_SESSION['passwordError'] = 'Parole nevar būt tukša';
+        }
+        // Redirect back to the form page
+        header('Location: public/LoginPage.php');
+        exit;
+    } else if (strlen($username) <= 3 || strlen($password) <= 3) {
+        if (strlen($username) <= 3) {
+            $_SESSION['usernameLenError'] = 'Lietotājvārdam jābut garākam par 3 zīmēm';
+        }
+        if (strlen($password) <= 4) {
+            $_SESSION['passwordLenError'] = 'Parolei jābut garākai par 4 zīmēm';
+        }
+        header('Location: public/LoginPage.php');
+        exit;
+    }
+
+    // Sekmīgi
     $authenticator = new AuthRepo();
     $user = $authenticator::registerUser($username, $password);
 
-    // $result = $authenticator::getAllMessages($username, $password);
-    echo $user;
-    var_dump($user);
+    if ($user) {
+        $_SESSION['regRez'] = $user;
+    }
+
+    header("Location: http://localhost/site/public/LoginPage.php");
 }
