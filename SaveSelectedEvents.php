@@ -6,7 +6,6 @@ include "AutoLoader.php";
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Assuming the checkboxes are named 'selectedEvents[]'
     if (isset($_POST['selectedEvents'])) {
         // Update session with new selection
         $_SESSION['selectedEvents'] = $_POST['selectedEvents'];

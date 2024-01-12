@@ -8,8 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
         function editMessage(messageId) {
-            // Example: Populate and show an edit form
-            // This can be a modal or a visible form in your page
             document.getElementById('editMessageId').value = messageId;
             document.getElementById('editForm').style.display = 'block';
         }

@@ -3,8 +3,6 @@ use Core\Repository\AuthRepo;
 
 include "AutoLoader.php";
 
-// require 'db.php'; // This file should contain the PDO connection code
-// require 'AuthClass.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars(trim($_POST['username']));

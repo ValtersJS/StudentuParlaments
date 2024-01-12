@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
     } else {
         $newMessage = new MessagesRepo();
         $newMessage::createMessage($lietotajaID, $teksts);
-        // Optionally set a success message or similar in $_SESSION
     }
     header('Location: public/MessagesPage.php');
     exit;
@@ -25,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['messageId'], $_POST['n
     $messageId = $_POST['messageId'];
     $newMessage = htmlspecialchars(trim($_POST['newMessage']));
 
-    // Perform validation on $newMessage
+    // Validation on $newMessage
 
     $result = MessagesRepo::updateMessage($messageId, $newMessage);
     if ($result) {

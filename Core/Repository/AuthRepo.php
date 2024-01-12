@@ -38,7 +38,6 @@ class AuthRepo extends AbstractItemRepository
                 'userID' => $userID
             ];
             // return $loginState;
-            // Additional actions like setting session variables can be done here
         } else {
             // Failure: Username and password didn't match
             $loginState = false;
