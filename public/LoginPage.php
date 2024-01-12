@@ -45,7 +45,7 @@
 
         <!-- Registration Form -->
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8" action="../RegisterScript.php" method="post">
-            <h1 class="block text-gray-800 text-lg font-bold mb-6">Register</h1>
+            <h1 class="block text-gray-800 text-lg font-bold mb-6">Reģistrēties</h1>
             <?php
             if (isset($_SESSION['regRez'])) {
                 echo "<p style='color:green;'>" . $_SESSION['regRez'] . "</p>";
