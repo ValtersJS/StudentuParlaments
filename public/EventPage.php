@@ -1,70 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<!-- <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="output.css" rel="stylesheet" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"
-        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous">
-        </script>
-</head> -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .table-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
 
-<body>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Events Table</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <!-- <link href="output.css" rel="stylesheet"> -->
-        <style>
-            .table-shadow {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            }
-        </style>
-    </head>
-
-    <body style="background-color: #E7E6E1">
-        <?php include "../templates/header.html"; ?>
+<body style="background-color: #E7E6E1">
+    <?php include "../templates/header.html"; ?>
+    <div class="container mx-auto mt-10 px-4">
+        <!-- Search Bar -->
+        <div class="my-4 text-center">
+            <input type="text" id="search" placeholder="Meklē pasākumu..."
+                class="p-2 rounded border focus:outline-none focus:ring focus:border-blue-300" />
+        </div>
         <form action="../SaveSelectedEvents.php" method="post">
-            <div class="container mx-auto mt-10 px-4">
-                <div class="flex flex-wrap -mx-2">
-                    <?php
-                    // session_start();
-                    use Core\Repository\ItemRepository;
+            <div class="flex flex-wrap -mx-2">
+                <?php
+                // session_start();
+                use Core\Repository\ItemRepository;
 
-                    include "..\AutoLoader.php";
+                include "..\AutoLoader.php";
 
-                    $request = new ItemRepository();
-                    $sql = "SELECT PasakumaID, Nosaukums, Teksts FROM pasakumi";
-                    $result = $request->connect()->query($sql);
+                $request = new ItemRepository();
+                $sql = "SELECT PasakumaID, Nosaukums, Teksts FROM pasakumi";
+                $result = $request->connect()->query($sql);
 
-                    $selectedEvents = isset($_SESSION['selectedEvents']) ? $_SESSION['selectedEvents'] : [];
-                    // var_dump($selectedEvents);
-                    while ($row = $result->fetch()) {
-                        $isChecked = in_array($row['PasakumaID'], $selectedEvents) ? "checked" : "";
-                        echo "<div class='w-full md:w-1/3 px-2 mb-4'>";
-                        echo "<div class='rounded-lg overflow-hidden shadow-lg bg-white p-4'>";
-                        echo "<input type='checkbox' name='selectedEvents[]' value='" . htmlspecialchars($row['PasakumaID']) . "' $isChecked>";
-                        echo "<div class='font-bold text-xl mb-2'>" . htmlspecialchars($row['Nosaukums']) . "</div>";
-                        echo "<p class='text-gray-700 text-base'>" . htmlspecialchars($row['Teksts']) . "</p>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                    ?>
-                </div>
+                $selectedEvents = isset($_SESSION['selectedEvents']) ? $_SESSION['selectedEvents'] : [];
+
+                while ($row = $result->fetch()) {
+                    $isChecked = in_array($row['PasakumaID'], $selectedEvents) ? "checked" : "";
+                    echo "<div class='w-full md:w-1/3 px-2 mb-4 event-card'>";
+                    echo "<div class='rounded-lg overflow-hidden shadow-lg bg-white p-4'>";
+                    echo "<input type='checkbox' name='selectedEvents[]' value='" . htmlspecialchars($row['PasakumaID']) . "' $isChecked>";
+                    echo "<div class='font-bold text-xl mb-2 event-name'>" . htmlspecialchars($row['Nosaukums']) . "</div>";
+                    echo "<p class='text-gray-700 text-base event-description'>" . htmlspecialchars($row['Teksts']) . "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+                ?>
             </div>
-            <div class="px-4 py-3 mr-20 text-left sm:px-6">
-                <button type="submit" class="inline-flex justify-center py-2 px-4 ml-20 border border-transparent
-                    shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
-                    Saglabā savu izvēli!
-                </button>
-            </div>
+            <?php
+            if (isset($_SESSION["permissions"]) && ($_SESSION["permissions"] === "admin" || $_SESSION["permissions"] === "registered")) {
+                echo '<div class="px-4 py-3 mr-20 text-center sm:px-6">';
+                echo '<button type="submit" class="inline-flex justify-center py-2 px-4 ml-20 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">';
+                echo 'Saglabā savu izvēli!';
+                echo '</button>';
+                echo '</div>';
+            }
+            ?>
         </form>
-
         <!-- Pasākumu pievienošana -->
         <?php
         if (isset($_SESSION["permissions"]) && $_SESSION["permissions"] === "admin") {
@@ -112,23 +104,29 @@
             </form>
             <?php
         } else {
-            echo "<p>Jums nav tiesību pievienot pasākumus!</p>";
+            echo "<div class='text-center'><p>Jums nav tiesību pievienot pasākumus!</p></div>";
         }
         ?>
-        </div>
-    </body>
+    </div>
+    <script>
+        const searchInput = document.getElementById("search");
+        const eventCards = document.querySelectorAll(".event-card");
 
-    </html>
+        searchInput.addEventListener("input", function () {
+            const searchTerm = searchInput.value.toLowerCase();
 
-    <?php
-    // use Core\Repository\ItemRepository;
-    
-    // include "..\AutoLoader.php";
-    
-    // items = ItemRepository::getAll();
-    // var_dump($items);
-    ?>
+            eventCards.forEach((card) => {
+                const eventName = card.querySelector(".event-name").textContent.toLowerCase();
+                const eventDescription = card.querySelector(".event-description").textContent.toLowerCase();
 
+                if (eventName.includes(searchTerm) || eventDescription.includes(searchTerm)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

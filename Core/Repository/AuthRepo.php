@@ -74,7 +74,7 @@ class AuthRepo extends AbstractItemRepository
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $insertSql = $request->connect()->prepare("INSERT INTO users (username, password, permissions) VALUES (?, ?, ?)");
             $insertSql->execute([$username, $hashedPassword, "registered"]);
-            $rez = $insertSql ? "Registration successful" : "Registration failed";
+            $rez = $insertSql ? "Reģistrācija izdevusies" : "Reģistrācija neizdevusies";
         } else {
             $rez = "User already exists!";
         }

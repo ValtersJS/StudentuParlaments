@@ -47,22 +47,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else if (isset($_POST["Logout"])) {
         session_start();
 
-        $userID = $_SESSION['userID'];
-        if ($_SESSION['selectedEvents'] != null) {
+        if (isset($_SESSION['userID'])) {
+            $userID = $_SESSION['userID'];
 
-            header("Location: public/LoginPage.php");
+            // Check if there are selected events to save
+            if (isset($_SESSION['selectedEvents']) && !empty($_SESSION['selectedEvents'])) {
+                $selectedEvents = $_SESSION['selectedEvents'];
+                $selectedEventsJson = json_encode($selectedEvents);
+
+                $request = new AuthRepo();
+                $sql = $request->connect()->prepare("UPDATE users SET Events = :savedData WHERE userID = :userID");
+                $sql->execute(['savedData' => $selectedEventsJson, 'userID' => $userID]);
+            }
+
+            session_unset();
+            session_destroy();
         }
-        $selectedEvents = $_SESSION['selectedEvents'];
-        $selectedEventsJson = json_encode($selectedEvents);
 
-        $request = new AuthRepo();
-        $sql = $request->connect()->prepare("UPDATE users SET Events = :savedData WHERE userID = :userID");
-        $sql->execute(['savedData' => $selectedEventsJson, 'userID' => $userID]);
-
-        session_unset();
-        session_destroy();
-        sleep(1);
         header("Location: public/LoginPage.php");
-        var_dump($_SESSION);
+        exit;
     }
 }
