@@ -4,33 +4,35 @@ use Core\Repository\MessagesRepo;
 
 include "AutoLoader.php";
 
-// require 'db.php'; // This file should contain the PDO connection code
-// require 'AuthClass.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Check if it's a message creation request
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message'])) {
     $teksts = htmlspecialchars(trim($_POST['message']));
     $lietotajaID = $_SESSION['userID'];
 
-    session_start();
-
     if (empty($teksts)) {
         $_SESSION['messageError'] = 'Ziņa nevar būt tukša';
-        header('Location: public/MessagesPage.php');
-        exit;
+    } else {
+        $newMessage = new MessagesRepo();
+        $newMessage::createMessage($lietotajaID, $teksts);
+        // Optionally set a success message or similar in $_SESSION
     }
-
-    // Validation (e.g., check if fields are empty)
-    // if ($teksts != '') {
-    $newEvent = new MessagesRepo();
-    $event = $newEvent::createMessage($lietotajaID, $teksts);
     header('Location: public/MessagesPage.php');
-    // } else {
-    //     // return "Ievadlauks ir tukšs";
-    //     echo '<script>';
-    //     echo 'alert("Ievadlauks ir tukšs");';
-    //     echo 'window.location.href="public/MessagesPage.php";';
-    //     echo '</script>';
-    //     exit;
-    // }
-    // $result = $authenticator::getAllMessages($username, $password);
+    exit;
+}
+
+// Check if it's a message editing request
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['messageId'], $_POST['newMessage'])) {
+    $messageId = $_POST['messageId'];
+    $newMessage = htmlspecialchars(trim($_POST['newMessage']));
+
+    // Perform validation on $newMessage
+
+    $result = MessagesRepo::updateMessage($messageId, $newMessage);
+    if ($result) {
+        // Set a success message in session or handle accordingly
+    } else {
+        // Set an error message in session or handle accordingly
+    }
+    header('Location: public/MessagesPage.php');
+    exit;
 }
