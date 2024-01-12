@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username) || empty($password)) {
         if (empty($username)) {
             // Set an error message in the session
-            $_SESSION['usernameError'] = 'Lietotājvārds nevar būt tukša';
+            $_SESSION['usernameError'] = 'Lietotājvārds nevar būt tukšs';
         }
         if (empty($password)) {
             // Set an error message in the session
